@@ -1,5 +1,4 @@
-import { View, StyleSheet, SafeAreaView } from 'react-native'
-import { Text, TextInput, Button, Portal, Snackbar } from 'react-native-paper';
+import { View, SafeAreaView, Text, TextInput, Button, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import { useLoginState } from '@/hooks/useLoginState';
 import { Link, useRouter } from 'expo-router';
@@ -23,39 +22,40 @@ export default function LoginScreen() {
   }
 
   return (
-    <SafeAreaView style={styles.screenContainer}>
-      <View style={styles.headerContainer}>
-        <Text variant='headlineMedium' style={{...styles.centeredText, ...styles.title}}>Bienvenido a ToTrack</Text>
-        <Text variant='bodyLarge' style={styles.centeredText}>Una app sencilla para crear tus rutinas diarias</Text>
+    <SafeAreaView className='flex h-screen px-4 justify-center align-middle'>
+      <View className='mb-9'>
+        <Text className='font-poppins-black text-2xl text-center'>ToTrack</Text>
+        <Text className='font-poppins-medium text-base text-center'>Una app sencilla para crear tus rutinas diarias</Text>
       </View>
       <View>
-        <Text variant='bodyMedium' style={{...styles.instruction, ...styles.centeredText}}>Ingresa tus datos para ingresar</Text>
-        <TextInput 
-          label={'Correo electrónico'}
+        <Text className='font-poppins-light text-base text-center mb-3'>Ingresa tus credenciales</Text>
+        <Text className='mb-2 pl-2 text-sm'>Correo electrónico</Text>
+        <TextInput
+          className='mb-4 py-2 px-2 border border-green-700 rounded'
           value={state.email}
-          mode='outlined'
           style={{marginBottom: 8}}
           onChangeText={text => handleChangeText('email', text)}
         />
+        <Text className='mb-2 pl-2 text-sm'>Contraseña</Text>
         <TextInput
-          label={'Contraseña'}
+          className='mb-4 py-2 px-2 border border-green-700 rounded'
           value={state.password}
           onChangeText={text => handleChangeText('password', text)}
-          mode='outlined'
           secureTextEntry={isSecure}
           style={{marginBottom: 20}}
-          right={<TextInput.Icon icon={isSecure ? 'eye' : 'eye-off'} onPress={() => setIsSecure(!isSecure)} />}
         />
-        <Button 
-          mode='contained' 
+        <Pressable
+          className='bg-green-700 w-full py-2.5 rounded mb-6'
           disabled={!isStateValid}
-          onPress={() => handleSubmit()} 
-          style={{marginBottom: 36}}>
-            Ingresar
-        </Button>
-        <Text variant='bodyMedium' style={{...styles.centeredText, marginBottom: 8}}>¿Aún no tienes cuenta?</Text>
+          onPress={() => handleSubmit()}
+        >
+          <Text className='w-full text-center color-green-50'>Enviar</Text>
+        </Pressable>
+        <Text className='text-center mb-2'>¿Aún no tienes cuenta?</Text>
         <Link href={'./signup'}>
-          <Button mode='outlined' style={{width: '100%'}}>Crear cuenta</Button>
+          <Pressable className='w-full'>
+            <Text>Crear cuenta</Text>
+          </Pressable>
         </Link>  
       </View>
       <Alert
@@ -67,25 +67,3 @@ export default function LoginScreen() {
     </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  screenContainer: {
-    flex: 1,
-    alignContent: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 16
-  },
-  title: {
-    fontWeight: 'bold',
-  },
-  centeredText: {
-    textAlign: 'center'
-  },
-  headerContainer: {
-    marginBottom: 36,
-  },
-  instruction: {
-    marginBottom: 8,
-    fontWeight: 'bold'
-  }
-});
