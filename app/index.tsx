@@ -3,6 +3,7 @@ import { Text, TextInput, Button, Portal, Snackbar } from 'react-native-paper';
 import React, { useState } from 'react'
 import { useLoginState } from '@/hooks/useLoginState';
 import { Link, useRouter } from 'expo-router';
+import Alert from '@/components/Alert';
 
 export default function LoginScreen() {
   const {state, isStateValid, handleChangeText, submitData} = useLoginState();
@@ -57,20 +58,12 @@ export default function LoginScreen() {
           <Button mode='outlined' style={{width: '100%'}}>Crear cuenta</Button>
         </Link>  
       </View>
-      <Portal>
-        <Snackbar
-          visible={isVisible}
-          onDismiss={() => setIsVisible(false)}
-          action={{
-            label: 'Cerrar'
-          }}
-          style={{
-            backgroundColor: '#F44336',
-          }}
-        >
-          Error con el servidor. Intente más tarde
-        </Snackbar>
-      </Portal>
+      <Alert
+        isVisible={isVisible}
+        label='Cerrar'
+        message='Error con el servidor. Intente más tarde.'
+        handleClose={() => setIsVisible(false)}
+      />
     </SafeAreaView>
   )
 }
