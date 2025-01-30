@@ -1,5 +1,5 @@
 import React from 'react'
-import { Portal, Snackbar } from 'react-native-paper'
+import { View } from 'react-native';
 
 interface AlertProps {
   message: string;
@@ -8,19 +8,8 @@ interface AlertProps {
   handleClose: VoidFunction;
 }
 
-export default function Alert({message, label, isVisible, handleClose}: AlertProps) {
+export function Alert({message, label, isVisible, handleClose}: AlertProps) {
   return (
-    <Portal>
-      <Snackbar
-        visible={isVisible}
-        onDismiss={handleClose}
-        action={{
-          label
-        }}
-        style={{
-          backgroundColor: '#F44336'
-        }}
-      >{message}</Snackbar>
-    </Portal>
+    <View></View>
   )
 }

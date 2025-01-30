@@ -1,8 +1,10 @@
-import { View, SafeAreaView, Text, TextInput, Button, Pressable } from 'react-native'
+import { View, SafeAreaView, Text, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import { useLoginState } from '@/hooks/useLoginState';
 import { Link, useRouter } from 'expo-router';
-import Alert from '@/components/Alert';
+import { Alert, TextField } from '@/components';
+import { Ionicons } from '@expo/vector-icons';
+import { PrimaryButton } from '@/components/PrimaryButton';
 
 export default function LoginScreen() {
   const {state, isStateValid, handleChangeText, submitData} = useLoginState();
@@ -29,32 +31,29 @@ export default function LoginScreen() {
       </View>
       <View>
         <Text className='font-poppins-light text-base text-center mb-3'>Ingresa tus credenciales</Text>
-        <Text className='mb-2 pl-2 text-sm'>Correo electrónico</Text>
-        <TextInput
-          className='mb-4 py-2 px-2 border border-green-700 rounded'
+        <TextField
+          label='Correo electrónico'
           value={state.email}
-          style={{marginBottom: 8}}
           onChangeText={text => handleChangeText('email', text)}
         />
-        <Text className='mb-2 pl-2 text-sm'>Contraseña</Text>
-        <TextInput
-          className='mb-4 py-2 px-2 border border-green-700 rounded'
+        <TextField 
+          label='Contraseña'
           value={state.password}
           onChangeText={text => handleChangeText('password', text)}
-          secureTextEntry={isSecure}
-          style={{marginBottom: 20}}
+          isSecureText={isSecure}
+          right={
+            <Ionicons name={isSecure ? 'eye' : 'eye-off'} onPress={() => setIsSecure(!isSecure)} />
+          }
         />
-        <Pressable
-          className='bg-green-700 w-full py-2.5 rounded mb-6'
+        <PrimaryButton
+          className='mb-8'
           disabled={!isStateValid}
           onPress={() => handleSubmit()}
-        >
-          <Text className='w-full text-center color-green-50'>Enviar</Text>
-        </Pressable>
+        />
         <Text className='text-center mb-2'>¿Aún no tienes cuenta?</Text>
         <Link href={'./signup'}>
-          <Pressable className='w-full'>
-            <Text>Crear cuenta</Text>
+          <Pressable className='w-full py-2.5 border border-green-700 rounded'>
+            <Text className='color-green-700 w-full text-center'>Crear cuenta</Text>
           </Pressable>
         </Link>  
       </View>
