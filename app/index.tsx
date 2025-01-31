@@ -2,9 +2,8 @@ import { View, SafeAreaView, Text, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import { useLoginState } from '@/hooks/useLoginState';
 import { Link, useRouter } from 'expo-router';
-import { Alert, TextField } from '@/components';
+import { Alert, TextField, PrimaryButton, OutlinedButton } from '@/components';
 import { Ionicons } from '@expo/vector-icons';
-import { PrimaryButton } from '@/components/PrimaryButton';
 
 export default function LoginScreen() {
   const {state, isStateValid, handleChangeText, submitData} = useLoginState();
@@ -52,9 +51,7 @@ export default function LoginScreen() {
         />
         <Text className='text-center mb-2'>¿Aún no tienes cuenta?</Text>
         <Link href={'./signup'}>
-          <Pressable className='w-full py-2.5 border border-green-700 rounded'>
-            <Text className='color-green-700 w-full text-center'>Crear cuenta</Text>
-          </Pressable>
+          <OutlinedButton message='Crear cuenta' />
         </Link>  
       </View>
       <Alert

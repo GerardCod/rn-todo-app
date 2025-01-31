@@ -1,4 +1,4 @@
-import { View, SafeAreaView, StyleSheet } from 'react-native'
+import { View, SafeAreaView, Text } from 'react-native'
 import React, { useState } from 'react'
 import { useSignUpState } from '@/hooks/useSignUpState'
 import { useRouter } from 'expo-router'
@@ -21,7 +21,7 @@ export default function SignUpScreen() {
 
   return (
     <SafeAreaView>
-      
+      <Text>SignUp Screen</Text>
     </SafeAreaView>
   )
 }

@@ -13,7 +13,7 @@ export function TextField({label, value, isSecureText = false, onChangeText, rig
   return (
     <View className='mb-3'>
       <Text className='mb-2 pl-2 text-xs font-poppins-medium'>{label}</Text>
-      <View className='border border-green-700 rounded'>
+      <View className='border border-green-700 rounded-lg'>
         <TextInput
           className='py-2 px-2'
           value={value}
